@@ -2,11 +2,15 @@ import React, { useState } from "react";
 import styles from "./Signup.module.css";
 import { TextField, Button, Typography } from "@mui/material";
 import { SignupCredentials } from "../../interfaces/SignupCredentials";
+import { useSignup } from "../../hooks/useSignup";
+import { SignupType } from "../../types/SignupType";
 
 export default function Signup() {
   const [signupCredentials, setSignupCrendtials] = useState<SignupCredentials>(
     { username: "", confirmUsername: "", password: "", confirmPassword: "" }
   );
+
+  const { signup, isPending, error}: SignupType = useSignup()
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const {name, value} = event.target;
@@ -17,7 +21,7 @@ export default function Signup() {
   }
 
   const handleSignup = ({username, password}: SignupCredentials) => {
-    console.log(username, password)
+    signup(signupCredentials)
   }
 
   const handleSubmit = (event: React.FormEvent) => {
@@ -83,8 +87,9 @@ export default function Signup() {
     value={signupCredentials.confirmPassword}
     onChange={handleChange}
   />
-  <Button variant="contained" type="submit">
+  <Button variant="contained" type="submit" disabled={isPending}>
     Signup
   </Button>
+  {error && <p>{error}</p>}
 </form></div>;
 }

@@ -1,12 +1,9 @@
 import { useState } from "react"
 import { projectAuth } from "../firebase/config"
 import { SignupCredentials } from "../interfaces/SignupCredentials"
+import { SignupType } from "../types/SignupType"
 
-export function useSignup(): {
-    error: string | null
-    isPending: boolean
-    signup: (credentials: SignupCredentials) => Promise<void>
-} {
+export function useSignup(): SignupType  {
     const [error, setError] = useState<string | null>(null)
     const [isPending, setIsPending] = useState<boolean>(false)
 
