@@ -1,13 +1,7 @@
 import React, { useState } from "react";
 import styles from "./Signup.module.css";
 import { TextField, Button, Typography } from "@mui/material";
-
-interface SignupCredentials {
-  username: string;
-  confirmUsername: string;
-  password: string;
-  confirmPassword: string;
-}
+import { SignupCredentials } from "../../interfaces/SignupCredentials";
 
 export default function Signup() {
   const [signupCredentials, setSignupCrendtials] = useState<SignupCredentials>(
